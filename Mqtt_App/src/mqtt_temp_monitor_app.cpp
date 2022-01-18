@@ -45,10 +45,10 @@ const string TOPIC { "test" };
 const int QOS = 1;
 
 const char* PAYLOADS[] = {
-	"Hello World!",
-	"Hi there!",
-	"Is anyone listening?",
-	"Someone is always listening.",
+	"20.0",
+	"28.5",
+	"35.2",
+	"27.0",
 	nullptr
 };
 
@@ -58,6 +58,8 @@ const auto TIMEOUT = std::chrono::seconds(10);
 
 int main(int argc, char* argv[])
 {
+	//unsigned int microseconds = 1000000;
+
 	string address = ""; // address of mqtt server
 	string topic = ""; // topic to publish to
 	
@@ -94,6 +96,8 @@ int main(int argc, char* argv[])
 		size_t i = 0;
 		while (PAYLOADS[i]) {
 			tok = top.publish(PAYLOADS[i++]);
+			std::this_thread::sleep_for(3s);
+			//usleep(3*microseconds); // sleep for 3seconds
 		}
 		tok->wait();	// Just wait for the last one to complete.
 		cout << "OK" << endl;
