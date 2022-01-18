@@ -45,10 +45,10 @@ const string TOPIC { "test" };
 const int QOS = 1;
 
 const char* PAYLOADS[] = {
-	"20.0",
-	"28.5",
-	"35.2",
-	"27.0",
+	"System Temp: 20.0",
+	"System Temp: 28.5",
+	"System Temp: 35.2",
+	"System Temp: 27.0",
 	nullptr
 };
 
@@ -95,6 +95,7 @@ int main(int argc, char* argv[])
 
 		size_t i = 0;
 		while (PAYLOADS[i]) {
+			std::this_thread::sleep_for(1s);
 			tok = top.publish(PAYLOADS[i++]);
 			std::this_thread::sleep_for(3s);
 			//usleep(3*microseconds); // sleep for 3seconds
